@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0.0",
+  "platform_version": "0.1.0",
+  "name": "my-agent",
+  "description": "",
+  "created_at": "2026-05-09T01:33:08.421641",
+  "exported_at": "2026-05-09T01:33:08.422260+00:00",
+  "tags": [],
+  "nodes": [
+    {
+      "id": "input_1778290126401",
+      "type": "input",
+      "label": "Input",
+      "position": {
+        "x": 191.63214614098425,
+        "y": 226.86530891537646
+      },
+      "config": {
+        "trigger": "http"
+      },
+      "ports": {
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "payload",
+            "name": "Payload",
+            "data_type": "json",
+            "required": false
+          }
+        ]
+      },
+      "metadata": {
+        "created_at": "2026-05-09T01:33:08.421684",
+        "updated_at": "2026-05-09T01:33:08.421686",
+        "notes": null
+      }
+    },
+    {
+      "id": "output_1778290127750",
+      "type": "output",
+      "label": "Output",
+      "position": {
+        "x": 1205.9327936033662,
+        "y": 380.7908884849792
+      },
+      "config": {
+        "mode": "json",
+        "status_code": 200
+      },
+      "ports": {
+        "inputs": [
+          {
+            "id": "payload",
+            "name": "Payload",
+            "data_type": "any",
+            "required": true
+          }
+        ],
+        "outputs": []
+      },
+      "metadata": {
+        "created_at": "2026-05-09T01:33:08.421706",
+        "updated_at": "2026-05-09T01:33:08.421708",
+        "notes": null
+      }
+    },
+    {
+      "id": "agent_1778290128961",
+      "type": "agent",
+      "label": "Agent",
+      "position": {
+        "x": 884.2972542041964,
+        "y": 344.03254112507403
+      },
+      "config": {
+        "model_id": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+        "inference_profile_arn": "",
+        "system_prompt": "You are a helpful AI assistant.",
+        "temperature": 0.7,
+        "max_tokens": 4096,
+        "streaming": false,
+        "tools": [],
+        "memory": {
+          "enabled": false,
+          "namespace": "default",
+          "top_k": 5,
+          "ttl_seconds": 3600
+        }
+      },
+      "ports": {
+        "inputs": [
+          {
+            "id": "message",
+            "name": "User message",
+            "data_type": "any",
+            "required": true
+          },
+          {
+            "id": "context",
+            "name": "Context",
+            "data_type": "any",
+            "required": false
+          }
+        ],
+        "outputs": [
+          {
+            "id": "response",
+            "name": "Agent response",
+            "data_type": "string",
+            "required": false
+          },
+          {
+            "id": "tool_calls",
+            "name": "Tool calls log",
+            "data_type": "json",
+            "required": false
+          }
+        ]
+      },
+      "metadata": {
+        "created_at": "2026-05-09T01:33:08.421729",
+        "updated_at": "2026-05-09T01:33:08.421731",
+        "notes": null
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-input_1778290126401-payload-agent_1778290128961-message",
+      "source_node_id": "input_1778290126401",
+      "source_port_id": "payload",
+      "target_node_id": "agent_1778290128961",
+      "target_port_id": "message",
+      "data_type": "json",
+      "transform": null
+    },
+    {
+      "id": "e-agent_1778290128961-response-output_1778290127750-payload",
+      "source_node_id": "agent_1778290128961",
+      "source_port_id": "response",
+      "target_node_id": "output_1778290127750",
+      "target_port_id": "payload",
+      "data_type": "string",
+      "transform": null
+    }
+  ],
+  "groups": [],
+  "canvas": {
+    "viewport": {
+      "x": 0.0,
+      "y": 0.0,
+      "zoom": 1.0
+    }
+  }
+}
